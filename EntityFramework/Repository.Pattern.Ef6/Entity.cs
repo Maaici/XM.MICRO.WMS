@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using TrackableEntities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Repository.Pattern.Infrastructure;
+using System;
 
 namespace Repository.Pattern.Ef6
 {
-    public abstract class Entity : ITrackable
+    [Serializable]
+    public abstract class Entity : IObjectState
     {
         [NotMapped]
-        public TrackingState TrackingState { get; set; }
-
-        [NotMapped]
-        public ICollection<string> ModifiedProperties { get; set; }
+        public ObjectState ObjectState { get; set; }
     }
 }

@@ -1,0 +1,105 @@
+﻿@model MICRO.WMS.WEB.Models.USERINOR
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>USERINOR</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USERCODE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERCODE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USERROLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERROLE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.REMARK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REMARK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADDWHO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADDWHO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADDID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADDID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADDTS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADDTS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDITWHO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDITWHO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDITID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDITID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDITTS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDITTS)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

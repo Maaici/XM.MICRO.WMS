@@ -1,27 +1,40 @@
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Repository.Pattern.DataContext;
-using TrackableEntities;
-using TrackableEntities.EF6;
+using Repository.Pattern.Infrastructure;
 
 namespace Repository.Pattern.Ef6
 {
-    [Obsolete("DataContext has been deprecated. Instead use UnitOfWork which uses DbContext.")]
     public class DataContext : DbContext, IDataContextAsync
     {
+        #region Private Fields
         private readonly Guid _instanceId;
+        bool _disposed;
+        #endregion Private Fields
 
         public DataContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
             _instanceId = Guid.NewGuid();
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
+            //Configuration.AutoDetectChangesEnabled = false;
         }
 
-        public Guid InstanceId => _instanceId;
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    //Oracle 表所有者，（SQL 改成 dbo(默认)，也可删除）
+        //    modelBuilder.HasDefaultSchema(System.Configuration.ConfigurationSettings.AppSettings["DbSchema"] == null ? "dbo" : System.Configuration.ConfigurationSettings.AppSettings["DbSchema"].ToString());
+        //    base.OnModelCreating(modelBuilder);
+        //}
+
+        public void SetAutoDetectChangesEnabled(bool enabled)
+        {
+            this.Configuration.AutoDetectChangesEnabled = enabled;
+        }
+        public Guid InstanceId { get { return _instanceId; } }
 
         /// <summary>
         ///     Saves all changes made in this context to the underlying database.
@@ -77,7 +90,7 @@ namespace Repository.Pattern.Ef6
         ///     objects written to the underlying database.</returns>
         public override async Task<int> SaveChangesAsync()
         {
-            return await SaveChangesAsync(CancellationToken.None);
+            return await this.SaveChangesAsync(CancellationToken.None);
         }
         /// <summary>
         ///     Asynchronously saves all changes made in this context to the underlying database.
@@ -110,23 +123,44 @@ namespace Repository.Pattern.Ef6
             return changesAsync;
         }
 
-        public void SyncObjectState<TEntity>(TEntity entity) where TEntity : class, ITrackable
+        public void SyncObjectState<TEntity>(TEntity entity) where TEntity : class, IObjectState
         {
-            this.ApplyChanges(entity);
+            Entry(entity).State = StateHelper.ConvertState(entity.ObjectState);
         }
 
         private void SyncObjectsStatePreCommit()
         {
-            var entities = ChangeTracker.Entries().Select(x => x.Entity).OfType<ITrackable>();
-            this.ApplyChanges(entities);
+            foreach (var dbEntityEntry in ChangeTracker.Entries())
+            {
+                dbEntityEntry.State = StateHelper.ConvertState(((IObjectState)dbEntityEntry.Entity).ObjectState);
+            }
         }
 
         public void SyncObjectsStatePostCommit()
         {
             foreach (var dbEntityEntry in ChangeTracker.Entries())
             {
-                ((ITrackable)dbEntityEntry.Entity).TrackingState = StateHelper.ConvertState(dbEntityEntry.State);
+                ((IObjectState)dbEntityEntry.Entity).ObjectState = StateHelper.ConvertState(dbEntityEntry.State);
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    // free other managed objects that implement
+                    // IDisposable only
+                }
+
+                // release any unmanaged objects
+                // set object references to null
+
+                _disposed = true;
+            }
+
+            base.Dispose(disposing);
         }
     }
 }

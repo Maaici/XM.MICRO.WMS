@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Data.Entity;
-using TrackableEntities;
+using Repository.Pattern.Infrastructure;
 
 namespace Repository.Pattern.Ef6
 {
     public class StateHelper
     {
-        public static EntityState ConvertState(TrackingState state)
+        public static EntityState ConvertState(ObjectState state)
         {
             switch (state)
             {
-                case TrackingState.Added:
+                case ObjectState.Added:
                     return EntityState.Added;
 
-                case TrackingState.Modified:
+                case ObjectState.Modified:
                     return EntityState.Modified;
 
-                case TrackingState.Deleted:
+                case ObjectState.Deleted:
                     return EntityState.Deleted;
 
                 default:
@@ -24,27 +24,27 @@ namespace Repository.Pattern.Ef6
             }
         }
 
-        public static TrackingState ConvertState(EntityState state)
+        public static ObjectState ConvertState(EntityState state)
         {
             switch (state)
             {
                 case EntityState.Detached:
-                    return TrackingState.Unchanged;
+                    return ObjectState.Unchanged;
 
                 case EntityState.Unchanged:
-                    return TrackingState.Unchanged;
+                    return ObjectState.Unchanged;
 
                 case EntityState.Added:
-                    return TrackingState.Added;
+                    return ObjectState.Added;
 
                 case EntityState.Deleted:
-                    return TrackingState.Deleted;
+                    return ObjectState.Deleted;
 
                 case EntityState.Modified:
-                    return TrackingState.Modified;
+                    return ObjectState.Modified;
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(state));
+                    throw new ArgumentOutOfRangeException("state");
             }
         }
     }

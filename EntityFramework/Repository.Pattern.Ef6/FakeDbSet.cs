@@ -5,14 +5,16 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using TrackableEntities;
+using Repository.Pattern.Infrastructure;
 
 namespace Repository.Pattern.Ef6
 {
     public abstract class FakeDbSet<TEntity> : DbSet<TEntity>, IDbSet<TEntity> where TEntity : Entity, new()
     {
+        #region Private Fields
         private readonly ObservableCollection<TEntity> _items;
         private readonly IQueryable _query;
+        #endregion Private Fields
 
         protected FakeDbSet()
         {
@@ -23,11 +25,11 @@ namespace Repository.Pattern.Ef6
         IEnumerator IEnumerable.GetEnumerator() { return _items.GetEnumerator(); }
         public IEnumerator<TEntity> GetEnumerator() { return _items.GetEnumerator(); }
 
-        public Expression Expression => _query.Expression;
+        public Expression Expression { get { return _query.Expression; } }
 
-        public Type ElementType => _query.ElementType;
+        public Type ElementType { get { return _query.ElementType; } }
 
-        public IQueryProvider Provider => _query.Provider;
+        public IQueryProvider Provider { get { return _query.Provider; } }
 
         public override TEntity Add(TEntity entity)
         {
@@ -43,19 +45,19 @@ namespace Repository.Pattern.Ef6
 
         public override TEntity Attach(TEntity entity)
         {
-            switch (entity.TrackingState)
+            switch (entity.ObjectState)
             {
-                case TrackingState.Modified:
+                case ObjectState.Modified:
                     _items.Remove(entity);
                     _items.Add(entity);
                     break;
                 
-                case TrackingState.Deleted:
+                case ObjectState.Deleted:
                     _items.Remove(entity);
                     break;
                 
-                case TrackingState.Unchanged:
-                case TrackingState.Added:
+                case ObjectState.Unchanged:
+                case ObjectState.Added:
                     _items.Add(entity);
                     break;
                 
@@ -69,6 +71,6 @@ namespace Repository.Pattern.Ef6
 
         public override TDerivedEntity Create<TDerivedEntity>() { return Activator.CreateInstance<TDerivedEntity>(); }
 
-        public override ObservableCollection<TEntity> Local => _items;
+        public override ObservableCollection<TEntity> Local { get { return _items; } }
     }
 }

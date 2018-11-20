@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Data;
+using Repository.Pattern.Infrastructure;
 using Repository.Pattern.Repositories;
-using TrackableEntities;
 
 namespace Repository.Pattern.UnitOfWork
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         int SaveChanges();
-        int ExecuteSqlCommand(string sql, params object[] parameters);
-        IRepository<TEntity> Repository<TEntity>() where TEntity : class, ITrackable;
-        int? CommandTimeout { get; set; }
+        IRepository<TEntity> Repository<TEntity>() where TEntity : class, IObjectState;
         void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified);
         bool Commit();
         void Rollback();
+        void SetAutoDetectChangesEnabled(bool enabled);
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using TrackableEntities;
+using Repository.Pattern.Infrastructure;
 
 namespace Repository.Pattern.Repositories
 {
-    public interface IQueryFluent<TEntity> where TEntity : ITrackable
+    public interface IQueryFluent<TEntity> where TEntity : IObjectState
     {
         IQueryFluent<TEntity> OrderBy(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy);
         IQueryFluent<TEntity> Include(Expression<Func<TEntity, object>> expression);

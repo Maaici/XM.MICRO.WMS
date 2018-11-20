@@ -4,16 +4,24 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Repository.Pattern.Infrastructure;
 using Repository.Pattern.Repositories;
-using TrackableEntities;
 
 namespace Service.Pattern
 {
-    public abstract class Service<TEntity> : IService<TEntity> where TEntity : class, ITrackable
+    public abstract class Service<TEntity> : IService<TEntity> where TEntity : class, IObjectState
     {
+        #region Private Fields
+
         private readonly IRepositoryAsync<TEntity> _repository;
 
+        #endregion Private Fields
+
+        #region Constructor
+
         protected Service(IRepositoryAsync<TEntity> repository) { _repository = repository; }
+
+        #endregion Constructor
 
         public virtual TEntity Find(params object[] keyValues) { return _repository.Find(keyValues); }
 
@@ -21,14 +29,10 @@ namespace Service.Pattern
 
         public virtual void Insert(TEntity entity) { _repository.Insert(entity); }
 
-        public virtual void ApplyChanges(TEntity entity) { _repository.ApplyChanges(entity); }
-
         public virtual void InsertRange(IEnumerable<TEntity> entities) { _repository.InsertRange(entities); }
 
-        [Obsolete("InsertOrUpdateGraph has been deprecated.  Instead set TrackingState to Added or Modified and call ApplyChanges.")]
         public virtual void InsertOrUpdateGraph(TEntity entity) { _repository.InsertOrUpdateGraph(entity); }
 
-        [Obsolete("InsertOrUpdateGraph has been deprecated.  Instead set TrackingState to Added or Modified and call ApplyChanges.")]
         public virtual void InsertGraphRange(IEnumerable<TEntity> entities) { _repository.InsertGraphRange(entities); }
 
         public virtual void Update(TEntity entity) { _repository.Update(entity); }
