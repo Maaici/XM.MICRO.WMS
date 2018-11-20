@@ -41,7 +41,6 @@ namespace MICRO.WMS.WEB.App_Start
             // container.LoadConfiguration();
 
             // TODO: Register your types here
-            container.RegisterType<DbContext, WebDbContext>(new HierarchicalLifetimeManager());
             container.RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerRequestLifetimeManager());//PerRequestLifetimeManager 存在一个请求的生命周期里面
             container.RegisterType<IDataContextAsync, WebDbContext>(new PerRequestLifetimeManager());
 

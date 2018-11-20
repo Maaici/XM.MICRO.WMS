@@ -15,9 +15,9 @@ namespace MICRO.WMS.WEB.Controllers
     public class USERINORController : Controller
     {
         //private WebDbContext db = new WebDbContext();
-        private IUnitOfWork _unitOfWork;
+        private IUnitOfWorkAsync _unitOfWork;
         private IUserInforService _userInforService;
-        public USERINORController(IUnitOfWork unitOfWork) {//,IUserInforService userInforService
+        public USERINORController(IUnitOfWorkAsync unitOfWork) {//,IUserInforService userInforService
             //_userInforService = userInforService;
             _unitOfWork = unitOfWork;
         }
