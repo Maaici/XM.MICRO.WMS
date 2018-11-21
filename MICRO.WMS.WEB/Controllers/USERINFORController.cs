@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using Newtonsoft.Json;
 using System.Web;
 using System.Web.Mvc;
 using MICRO.WMS.WEB.Models;
@@ -28,10 +29,12 @@ namespace MICRO.WMS.WEB.Controllers
             return View();
         }
 
-        public ActionResult GetData() {
+        public string GetData() {
+            PageResponseModel model = new PageResponseModel();
             var data = _unitOfWork.Repository<USERINFOR>().Query().Select().ToList();
-            var pagelist = new {  rows = data };
-            return Json(pagelist, JsonRequestBehavior.AllowGet);
+            model.count = data.Count();
+            model.data = data;
+            return JsonConvert.SerializeObject(model);
         }
 
         // GET: USERINFOR/Details/5

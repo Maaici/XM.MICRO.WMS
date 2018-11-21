@@ -184,6 +184,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\PageResponseModel.cs" />
     <Compile Include="Models\USERINFOR.cs" />
     <Compile Include="Models\WebDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
