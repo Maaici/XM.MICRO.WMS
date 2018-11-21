@@ -8,10 +8,10 @@ using System.Web;
 
 namespace MICRO.WMS.WEB.Services.UserInforService
 {
-    public class UserInforService : Service<USERINOR> , IUserInforService
+    public class UserInforService : Service<USERINFOR> , IUserInforService
     {
-        private readonly IRepositoryAsync<USERINOR> _repository;
-        public UserInforService(IRepositoryAsync<USERINOR> repository)
+        private readonly IRepositoryAsync<USERINFOR> _repository;
+        public UserInforService(IRepositoryAsync<USERINFOR> repository)
             : base(repository)
         {
             _repository = repository;

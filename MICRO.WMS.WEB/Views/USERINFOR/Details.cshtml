@@ -1,0 +1,99 @@
+﻿@model MICRO.WMS.WEB.Models.USERINFOR
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>USERINFOR</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USERCODE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERCODE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USERROLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERROLE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.REMARK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REMARK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADDWHO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADDWHO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADDID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADDID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADDTS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADDTS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDITWHO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDITWHO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDITID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDITID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDITTS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDITTS)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -5,6 +5,7 @@ using MICRO.WMS.WEB.Services.UserInforService;
 using Microsoft.Practices.Unity;
 using Repository.Pattern.DataContext;
 using Repository.Pattern.Ef6;
+using Repository.Pattern.Repositories;
 using Repository.Pattern.UnitOfWork;
 
 namespace MICRO.WMS.WEB.App_Start
@@ -44,6 +45,7 @@ namespace MICRO.WMS.WEB.App_Start
             container.RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerRequestLifetimeManager());//PerRequestLifetimeManager 存在一个请求的生命周期里面
             container.RegisterType<IDataContextAsync, WebDbContext>(new PerRequestLifetimeManager());
 
+            container.RegisterType<IRepositoryAsync<USERINFOR>, Repository<USERINFOR>>();
             container.RegisterType<IUserInforService, UserInforService>();
 
 

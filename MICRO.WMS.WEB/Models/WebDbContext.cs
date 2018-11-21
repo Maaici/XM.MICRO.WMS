@@ -34,7 +34,7 @@ namespace MICRO.WMS.WEB.Models
         }
 
         //下面放置的是数据库对应的实体对象
-        public DbSet<USERINOR> UserInfor { get; set; }
+        public DbSet<USERINFOR> UserInfor { get; set; }
 
     }
 }
