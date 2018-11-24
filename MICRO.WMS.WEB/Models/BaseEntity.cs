@@ -35,5 +35,9 @@ namespace MICRO.WMS.WEB.Models
         [Display(Name = "修改时间", Description = "修改时间")]
         public DateTime? EDITTS { get; set; }
 
+        [Display(Name = "操作点", Description = "操作点")]
+        [StringLength(10)]
+        public string OP_POINT { get; set; }
+
     }
 }

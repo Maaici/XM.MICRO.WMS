@@ -52,6 +52,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -179,15 +185,38 @@
     <Compile Include="App_Start\UnityDependencyResolver.cs" />
     <Compile Include="App_Start\UnityWebActivator.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MemuInforController.cs" />
     <Compile Include="Controllers\USERINFORController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811220049530_AddBlogCreate.cs" />
+    <Compile Include="Migrations\201811220049530_AddBlogCreate.Designer.cs">
+      <DependentUpon>201811220049530_AddBlogCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811220059575_AddBlogCreate1.cs" />
+    <Compile Include="Migrations\201811220059575_AddBlogCreate1.Designer.cs">
+      <DependentUpon>201811220059575_AddBlogCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811220235122_AddBlogCreate2.cs" />
+    <Compile Include="Migrations\201811220235122_AddBlogCreate2.Designer.cs">
+      <DependentUpon>201811220235122_AddBlogCreate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811241031019_mac11241830.cs" />
+    <Compile Include="Migrations\201811241031019_mac11241830.Designer.cs">
+      <DependentUpon>201811241031019_mac11241830.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\MemuInfor.cs" />
+    <Compile Include="Models\OperationPoint.cs" />
     <Compile Include="Models\PageResponseModel.cs" />
     <Compile Include="Models\USERINFOR.cs" />
     <Compile Include="Models\WebDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MmuInforService\IMemuInforService.cs" />
+    <Compile Include="Services\MmuInforService\MemuInforService.cs" />
     <Compile Include="Services\UserInforService\IUserInforService.cs" />
     <Compile Include="Services\UserInforService\UserInforService.cs" />
   </ItemGroup>
@@ -196,6 +225,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\maaici.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -324,6 +355,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Particleground.js" />
+    <Content Include="Scripts\verificationNumbers.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -343,6 +376,8 @@
     <Content Include="Views\USERINFOR\Details.cshtml" />
     <Content Include="Views\USERINFOR\Edit.cshtml" />
     <Content Include="Views\USERINFOR\Index.cshtml" />
+    <Content Include="Views\MemuInfor\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -375,6 +410,20 @@
       <Project>{86f86650-ee3c-4372-8fec-40c2fe015022}</Project>
       <Name>Service.Pattern</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811220049530_AddBlogCreate.resx">
+      <DependentUpon>201811220049530_AddBlogCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811220059575_AddBlogCreate1.resx">
+      <DependentUpon>201811220059575_AddBlogCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811220235122_AddBlogCreate2.resx">
+      <DependentUpon>201811220235122_AddBlogCreate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811241031019_mac11241830.resx">
+      <DependentUpon>201811241031019_mac11241830.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

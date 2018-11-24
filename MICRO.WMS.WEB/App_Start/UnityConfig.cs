@@ -1,7 +1,10 @@
 using System;
 using System.Data.Entity;
+using System.Web;
 using MICRO.WMS.WEB.Models;
-using MICRO.WMS.WEB.Services.UserInforService;
+using MICRO.WMS.WEB.Services;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using Repository.Pattern.DataContext;
 using Repository.Pattern.Ef6;
@@ -42,6 +45,11 @@ namespace MICRO.WMS.WEB.App_Start
             // container.LoadConfiguration();
 
             // TODO: Register your types here
+
+            //container.RegisterType<IRoleStore<ApplicationRole, string>, RoleStore<ApplicationRole>>(new HierarchicalLifetimeManager());
+            //container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
+            //container.RegisterType<IAuthenticationManager>(new InjectionFactory(o => HttpContext.Current.GetOwinContext().Authentication));
+
             container.RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerRequestLifetimeManager());//PerRequestLifetimeManager 存在一个请求的生命周期里面
             container.RegisterType<IDataContextAsync, WebDbContext>(new PerRequestLifetimeManager());
 

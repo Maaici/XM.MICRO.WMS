@@ -1,0 +1,71 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>登录WMS</title>
+    <meta name="author" content="DeathGhost" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <style>
+        body {
+            height: 100%;
+            background: #4f4f4f;
+            overflow: hidden;
+        }
+        canvas {
+            z-index: -1;
+            position: absolute;
+        }
+    </style>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/verificationNumbers.js"></script>
+    @*<script src="~/Scripts/Particleground.js"></script>*@
+    <script>
+        $(document).ready(function () {
+            //验证码
+            createCode();
+            //测试提交，对接程序删除即可
+            $(".submit_btn").click(function () {
+                location.href = "javascrpt:;"/*tpa=http://***index.html*/;
+            });
+        });
+    </script>
+</head>
+<body>
+    <dl class="admin_login">
+        <dt>
+            <strong>欢迎登陆 Micro WMS</strong>
+            <em>Management System</em>
+        </dt>
+        <dd class="user_icon">
+            <input type="text" placeholder="账号" class="login_txtbx" />
+        </dd>
+        <dd class="pwd_icon">
+            <input type="password" placeholder="密码" class="login_txtbx" />
+        </dd>
+        <dd></dd>
+        @*<dd class="val_icon">
+            <div class="checkcode">
+                <input type="text" id="J_codetext" placeholder="验证码" maxlength="4" class="login_txtbx">
+                <canvas id="myCanvas" onclick="createCode()">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+            </div>
+            <input type="button" value="验证码核验" class="ver_btn" onClick="validate();">
+        </dd>*@
+        <dd>
+            <input type="button" value="立即登陆" class="submit_btn" />
+        </dd>
+        <dd>
+            @*<a href="/Login/Register">立即注册</a>*@
+            <p>© 2018 mac 版权所有</p>
+        </dd>
+    </dl>
+</body>
+
+</html>
+
+

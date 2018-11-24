@@ -2,9 +2,52 @@
     ViewBag.Title = "Home Page";
 }
 
-<h1>Micro WMS</h1>
-<h2>Micro WMS</h2>
-<h3>Micro WMS</h3>
-<h4>Micro WMS</h4>
-<h5>Micro WMS</h5>
-<h6>Micro WMS</h6>
+
+<div class="layui-tab-item layui-show">
+
+    <div class="layui-card m-header">
+        <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+            <a lay-href>主页</a><span lay-separator="">/</span>
+            <a><cite>@ViewBag.Title</cite></a>
+        </div>
+    </div>
+
+    <div class="layui-fluid" style="padding-top:10px">
+        <h1>Micro WMS</h1>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>layui开发时间线</legend>
+        </fieldset>
+        <ul class="layui-timeline">
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis"></i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title">2018年，layui 5.0 发布。并发展成为中国最受欢迎的前端UI框架（期望）</div>
+                </div>
+            </li>
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis"></i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title">2017年，layui 里程碑版本 2.0 发布</div>
+                </div>
+            </li>
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis"></i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title">2016年，layui 首个版本发布</div>
+                </div>
+            </li>
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis"></i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title">2015年，layui 孵化</div>
+                </div>
+            </li>
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop layui-timeline-axis"></i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title">更久前，轮子时代。维护几个独立组件：layer等</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

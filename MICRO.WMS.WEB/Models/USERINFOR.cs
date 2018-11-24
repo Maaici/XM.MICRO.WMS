@@ -20,6 +20,10 @@ namespace MICRO.WMS.WEB.Models
         [StringLength(20)]
         public string USERCODE { get; set; }
 
+        [Display(Name = "用户部门", Description = "用户部门")]
+        [StringLength(50)]
+        public string USERDEPT { get; set; }
+
         [Display(Name = "角色", Description = "角色")]
         [StringLength(20)]
         public string USERROLE { get; set; }

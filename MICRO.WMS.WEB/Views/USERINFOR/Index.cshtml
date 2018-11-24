@@ -5,64 +5,71 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="layui-card layadmin-header">
-    <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
-        <a href="~/Home/Index">主页</a>
-        <span class="lay-separator">/</span>
-        <a>
-            <cite>用户管理</cite>
-        </a>
-        <span class="lay-separator">/</span>
-        <a>
-            <cite>用户信息</cite>
-        </a>
+<div class="layui-tab-item layui-show">
+
+    <div class="layui-card m-header">
+        <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+            <a href="~/Home/index">主页</a><span lay-separator="">/</span>
+            <a><cite>用户管理</cite></a><span lay-separator="">/</span>
+            <a><cite>用户信息</cite></a>
+        </div>
+    </div>
+
+    <div class="layui-fluid">
+        @*<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>查询</legend>
+        </fieldset>*@
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>用户信息</legend>
+        </fieldset>
+
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="code" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户编号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户角色</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="role" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">XXXXX</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="xxx" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <button class="layui-btn layuiadmin-btn-forum-list" lay-submit="" lay-filter="LAY-app-forumlist-search">
+                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <table class="layui-hide" id="test" lay-filter="test"></table>
+
     </div>
 </div>
 
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-    <legend>查询</legend>
-</fieldset>
-
-<form class="layui-form" action="">
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">用户名称</label>
-            <div class="layui-input-inline">
-                <input type="text" name="code" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">用户编号</label>
-            <div class="layui-input-inline">
-                <input type="text" name="name" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">用户角色</label>
-            <div class="layui-input-inline">
-                <input type="text" name="role" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">XXXXX</label>
-            <div class="layui-input-inline">
-                <input type="text" name="xxx" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-    </div>
-</form>
-
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-    <legend>用户信息</legend>
-</fieldset>
-
-<table class="layui-hide" id="test" lay-filter="test"></table>
-
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+        <button class="layui-btn layui-btn-sm" lay-event="insertData">新增条目</button>
+        @*<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+            <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>*@
     </div>
 </script>
 
@@ -103,16 +110,19 @@
         table.on('toolbar(test)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
-                case 'getCheckData':
-                    var data = checkStatus.data;
-                    layer.alert(JSON.stringify(data));
-                    break;
-                case 'getCheckLength':
-                    var data = checkStatus.data;
-                    layer.msg('选中了：' + data.length + ' 个');
-                    break;
-                case 'isAll':
-                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                //case 'getCheckData':
+                //    var data = checkStatus.data;
+                //    layer.alert(JSON.stringify(data));
+                //    break;
+                //case 'getCheckLength':
+                //    var data = checkStatus.data;
+                //    layer.msg('选中了：' + data.length + ' 个');
+                //    break;
+                //case 'isAll':
+                //    layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                //    break;
+                case 'insertData':
+                    window.location.href = "/USERINFOR/CREATE";
                     break;
             };
         });
@@ -140,4 +150,3 @@
         });
     });
 </script>
-

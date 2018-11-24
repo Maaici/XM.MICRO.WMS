@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using System.Web;
 using System.Web.Mvc;
 using MICRO.WMS.WEB.Models;
-using MICRO.WMS.WEB.Services.UserInforService;
+using MICRO.WMS.WEB.Services;
 using Repository.Pattern.UnitOfWork;
 
 namespace MICRO.WMS.WEB.Controllers
@@ -29,6 +29,7 @@ namespace MICRO.WMS.WEB.Controllers
             return View();
         }
 
+        //获取查询页面数据
         public string GetData() {
             PageResponseModel model = new PageResponseModel();
             var data = _unitOfWork.Repository<USERINFOR>().Query().Select().ToList();
@@ -36,6 +37,79 @@ namespace MICRO.WMS.WEB.Controllers
             model.data = data;
             return JsonConvert.SerializeObject(model);
         }
+
+        /// <summary>
+        /// 添加数据
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult InsertData(USERINFOR user) {
+            _unitOfWork.Repository<USERINFOR>().Insert(user);
+            try
+            {
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex) {
+                return Json(new { Success = false, ErrMsg = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { Success = true, ErrMsg = "" }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        /// <param name="user">待删除的实体</param>
+        /// <returns></returns>
+        public ActionResult DeleteData(USERINFOR user) {
+            _unitOfWork.Repository<USERINFOR>().Delete(user);
+            try
+            {
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ErrMsg = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { Success = true, ErrMsg = "" }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        /// <param name="id">主键ID</param>
+        /// <returns></returns>
+        public ActionResult DeleteData(int id)
+        {
+            _unitOfWork.Repository<USERINFOR>().Delete(id);
+            try
+            {
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ErrMsg = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { Success = true, ErrMsg = "" }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 修改数据
+        /// </summary>
+        /// <param name="uesr"></param>
+        /// <returns></returns>
+        public ActionResult UpsateData(USERINFOR uesr) {
+            _unitOfWork.Repository<USERINFOR>().Update(uesr);
+            try
+            {
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, ErrMsg = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { Success = true, ErrMsg = "" }, JsonRequestBehavior.AllowGet);
+        }
+
 
         // GET: USERINFOR/Details/5
         public ActionResult Details(int? id)

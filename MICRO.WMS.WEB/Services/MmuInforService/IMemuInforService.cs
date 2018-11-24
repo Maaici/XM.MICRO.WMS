@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MICRO.WMS.WEB.Services
 {
-    public interface IUserInforService : IService<USERINFOR>
+    public interface IMemuInforService : IService<MemuInfor>
     {
     }
 }
